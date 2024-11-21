@@ -35,7 +35,16 @@ android {
         disable 'InvalidPackage'
     }
 }
-
+subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion 34
+                buildToolsVersion "27.0.2"
+            }
+        }
+    }
+}
 dependencies {
 
     /*录音库*/
