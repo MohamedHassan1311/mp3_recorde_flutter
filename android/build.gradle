@@ -25,7 +25,9 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    namespace 'com.example.namespace'
+
+    compileSdkVersion 33
 
     defaultConfig {
         minSdkVersion 16
@@ -36,11 +38,11 @@ android {
     }
 }
 subprojects {
-    afterEvaluate {project ->
-        if (project.hasProperty("android")) {
-            android {
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin("com.android.application") ||
+            project.plugins.hasPlugin("com.android.library")) {
+            project.android {
                 compileSdkVersion 34
-                buildToolsVersion "27.0.2"
             }
         }
     }
